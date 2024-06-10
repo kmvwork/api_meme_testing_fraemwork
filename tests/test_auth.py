@@ -20,4 +20,4 @@ class TestAuth:
     @pytest.mark.parametrize("body", data_auth_negative_name)
     def test_auth_negative(self, body):
         response = MemeApi.authorize(body)
-        Checking.check_status_code_is_not(response, 200)
+        Checking.check_status_code(response, 400)

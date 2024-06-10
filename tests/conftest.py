@@ -37,4 +37,5 @@ def create_meme(auth):
     }
     header = {'Authorization': f'{auth}'}
     response = MemeApi.post_meme(body, header)
-    return response
+    yield response
+    MemeApi.delete_meme(response.json()['id'], header)

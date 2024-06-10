@@ -40,4 +40,4 @@ class TestPutMeme:
         meme_id = response.json()['id']
         new_body = {}
         response = MemeApi.put_meme(meme_id, new_body, header)
-        Checking.check_status_code_is_not(response, 200)
+        Checking.check_status_code(response, 400)

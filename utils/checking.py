@@ -1,4 +1,5 @@
 from requests import Response
+import json
 
 from src.enums.global_enums import GlobalErrorMessages
 
@@ -38,3 +39,16 @@ class Checking:
         assert response == text, (GlobalErrorMessages.WRONG_RESPONSE_TEXT.value +
                                   f' Received response text: "{response}" . '
                                   f'Expected response text: "{text}"')
+
+    @staticmethod
+    def check_diff_response_requests_body(response: Response, expected_response_body):
+        # response = response.json()
+        # expected_response_body = json.loads(expected_response_body)
+        # expected_response_body = expected_response_body.json()
+        print(f'expected_response_body: {expected_response_body}')
+        print(f'response: {response.json()}')
+        # assert sorted(response) == sorted(
+        #     expected_response_body), GlobalErrorMessages.WRONG_RESPONSE_BODY
+
+        assert sorted(response.json()) == sorted(expected_response_body), GlobalErrorMessages.WRONG_RESPONSE_BODY
+

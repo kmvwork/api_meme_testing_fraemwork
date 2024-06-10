@@ -16,9 +16,13 @@ class TestPostMeme:
         response = MemeApi.post_meme(data, headers)
         Checking.check_status_code(response, 200)
         Checking.check_json_scheme(response, PostMeme)
+        new_data = data
+        new_data['id'] = response.json()['id']
+        new_data['updated_by'] = 'test'
+        Checking.check_diff_response_requests_body(response, new_data)
 
     @allure.title('TestPostMemeWithoutBody')
     def test_post_meme_without_body(self, auth):
         headers = {'Authorization': f'{auth}'}
         response = MemeApi.post_meme(None, headers)
-        Checking.check_status_code_is_not(response, 200)
+        Checking.check_status_code(response, 500)

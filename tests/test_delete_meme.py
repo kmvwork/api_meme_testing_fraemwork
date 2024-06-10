@@ -26,4 +26,4 @@ class TestDeleteMeme:
     def test_delete_meme_negative(self, auth):
         header = {'Authorization': f'{auth}'}
         response = MemeApi.delete_meme(10000000, header)
-        Checking.check_status_code_is_not(response, 200)
+        Checking.check_status_code(response, 404)
