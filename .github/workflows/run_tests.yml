@@ -29,22 +29,22 @@ jobs:
           python-version: '3.10'
       - name: Install dependencies
         run: pip install -r requirements
-      - name: Run all tests --alluredir=allure-results
+      - name: Run all tests --alluredir=build/allure-results
         if: "github.event.inputs.deployment_target == 'all'"
         continue-on-error: true
         run: pytest
-      - name: Run smoke tests --alluredir=allure-results
+      - name: Run smoke tests --alluredir=build/allure-results
         if: "github.event.inputs.deployment_target == 'smoke'"
         continue-on-error: true
         run: pytest -m smoke
-      - name: Run regression tests --alluredir=allure-results
+      - name: Run regression tests --alluredir=build/allure-results
         if: "github.event.inputs.deployment_target == 'regression'"
         continue-on-error: true
         run: pytest -m regression
-      - name: Run extendend tests --alluredir=allure-results
+      - name: Run extendend tests --alluredir=build/allure-results
         if: "github.event.inputs.deployment_target == 'extendend'"
         continue-on-error: true
-        run: pytest -m extendend --alluredir=allure-results
+        run: pytest -m extendend --alluredir=build/allure-results
       - name: Install Java
         uses: actions/setup-java@v4
         with:
